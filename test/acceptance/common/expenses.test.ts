@@ -34,6 +34,7 @@ describe('Given that we have a healthy service', () => {
       const res = await Api
         .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&sortBy=amount_in_cents')
         .expect(200);
+
       expect(res.body[0]).toEqual(
         {
           id: '314d54f4-8a5f-4c1d-b735-426b54794a44',
@@ -51,6 +52,7 @@ describe('Given that we have a healthy service', () => {
       const res = await Api
         .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&sortBy=hello')
         .expect(403);
+
       expect(res.body).toEqual(
         {
           error: '"sortBy" must be one of [amount_in_cents, date_created]',
