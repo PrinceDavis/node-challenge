@@ -87,4 +87,17 @@ describe('[Packages | Expense-domain | Db-access-methods] readExpenses', () => {
     expect(jeppRawData.rowCount).toBe(expenseData.length);
     expect(expenseData).toEqual(expect.arrayContaining(jeppRawData.rows));
   });
+
+  test('Data can be paginated', async () => {
+    const sql = 'SELECT * FROM expenses  where user_id = $1 LIMIT 2';
+    const jeppRawData = await query(sql, [JEPPED_ID]);
+    const expenseData = await readExpenses({
+      currency: 'DKK',
+      userId: JEPPED_ID,
+      pageSize: '2',
+    });
+
+    expect(jeppRawData.rowCount).toBe(expenseData.length);
+    expect(expenseData).toEqual(expect.arrayContaining(jeppRawData.rows));
+  });
 });

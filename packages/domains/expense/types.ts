@@ -10,8 +10,10 @@ export interface Expense {
 
 export interface readExpensesInputs {
     merchantName?: string
+    pageSize?: string
     currency?: string
     status?: string
     sortBy?: string
+    page?: string
     userId: string
   }

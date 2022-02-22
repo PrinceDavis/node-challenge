@@ -10,8 +10,10 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
   const query = {
     merchantName: <string>req.query.merchantName || '',
     currency: <string>req.query.currency || '',
+    pageSize: <string>req.query.pageSize || '',
     sortBy: <string>req.query.sortBy || '',
     status: <string>req.query.status || '',
+    page: <string>req.query.page || '',
     userId: <string>req.query.userId,
   };
   const [expenseError, userExpenses] = await to(getUserExpenses(query));

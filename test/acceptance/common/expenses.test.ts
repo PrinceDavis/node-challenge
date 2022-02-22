@@ -111,3 +111,13 @@ describe('Given that we have a healthy service', () => {
     });
   });
 });
+
+describe('Query of users expenses result can be paginated', () => {
+  test('Given a valid userId and filter parameter, expense records of the user should be returned', async () => {
+    const res = await Api
+      .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&pageSize=2')
+      .expect(200);
+
+    expect(res.body.length).toBe(2);
+  });
+});
