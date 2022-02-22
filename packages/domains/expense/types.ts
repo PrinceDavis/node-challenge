@@ -9,6 +9,9 @@ export interface Expense {
 }
 
 export interface readExpensesInputs {
-    userId: string
+    merchantName?: string
+    currency?: string
+    status?: string
     sortBy?: string
+    userId: string
   }

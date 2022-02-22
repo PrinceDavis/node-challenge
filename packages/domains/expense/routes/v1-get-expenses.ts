@@ -8,7 +8,10 @@ export const router = Router();
 
 router.get('/get-user-expenses', validateQueryInputs, async function getUserExpensesHandler(req, res, next) {
   const query = {
+    merchantName: <string>req.query.merchantName || '',
+    currency: <string>req.query.currency || '',
     sortBy: <string>req.query.sortBy || '',
+    status: <string>req.query.status || '',
     userId: <string>req.query.userId,
   };
   const [expenseError, userExpenses] = await to(getUserExpenses(query));

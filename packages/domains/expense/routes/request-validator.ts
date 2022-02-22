@@ -2,8 +2,11 @@ import Joi from 'joi';
 
 export function validateQueryInputs(req, res, next) {
   const schema = Joi.object({
-    userId: Joi.string().required(),
     sortBy: Joi.string().valid('amount_in_cents', 'date_created'),
+    status: Joi.string().valid('pending', 'processed'),
+    merchantName: Joi.string().max(40),
+    currency: Joi.string().max(4),
+    userId: Joi.string().required(),
   }).required();
   const { error } = schema.validate(req.query);
   if (error) {

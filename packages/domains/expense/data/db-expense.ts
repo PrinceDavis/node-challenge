@@ -1,14 +1,42 @@
 import { query } from '@nc/utils/db';
 import { Expense, readExpensesInputs } from '../types';
 
-const TABLE_NAME = 'expenses';
-
 export function readExpenses(queryInput: readExpensesInputs): Promise<Expense[]> {
-  const { userId, sortBy } = queryInput;
-  const queryArgs = [userId];
+  const { queryString, queryArgs } = buildSql(queryInput);
+  return query(queryString, queryArgs).then((response) => response.rows);
+}
+
+function buildSql(queryInput: readExpensesInputs) {
+  const TABLE_NAME = 'expenses';
+  const { userId, sortBy, merchantName, currency, status } = queryInput;
   const queryString = [`SELECT * FROM ${TABLE_NAME}  where user_id = $1 `];
-  if (sortBy) {
-    queryString.push(`ORDER BY ${sortBy} DESC`);
+  let currentParameter = 1;
+  const queryArgs = [userId];
+
+  if (merchantName) {
+    currentParameter += 1;
+    queryString.push(`AND merchant_name = $${currentParameter} `);
+    queryArgs.push(merchantName);
   }
-  return query(queryString.join(''), queryArgs).then((response) => response.rows);
+
+  if (currency) {
+    currentParameter += 1;
+    queryString.push(`AND currency = $${currentParameter} `);
+    queryArgs.push(currency);
+  }
+
+  if (status) {
+    currentParameter += 1;
+    queryString.push(`AND status = $${currentParameter} `);
+    queryArgs.push(status);
+  }
+
+  if (sortBy) {
+    queryString.push(`ORDER BY ${sortBy} DESC;`);
+  }
+
+  return {
+    queryString: queryString.join(''),
+    queryArgs,
+  };
 }
