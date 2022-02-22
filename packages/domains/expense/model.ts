@@ -7,6 +7,7 @@ export async function getUserExpenses(userId: string): Promise<Expense[]> {
   if (!userId) {
     throw BadRequest('userId property is missing.');
   }
+
   const [dbError, rowExpenses] = await to(readExpenses(userId));
 
   if (dbError) {
