@@ -60,4 +60,54 @@ describe('Given that we have a healthy service', () => {
       );
     });
   });
+
+  describe('Query of users expenses filtered by status', () => {
+    test('Given a valid userId and filter parameter, expense records of the user should be returned', async () => {
+      const res = await Api
+        .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&status=processed')
+        .expect(200);
+
+      expect(res.body.length).toBeGreaterThan(0);
+    });
+
+    test('Given a valid userId and an invalid status filter value, request should be rejected', async () => {
+      const res = await Api
+        .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&status=hello')
+        .expect(403);
+
+      expect(res.body).toEqual(
+        {
+          error: '"status" must be one of [pending, processed]',
+        }
+      );
+    });
+  });
+
+  describe('Query of users expenses filtered by merchant name', () => {
+    test('Given a valid userId and filter parameter, expense records of the user should be returned', async () => {
+      const res = await Api
+        .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&merchantName=Donkey Republic')
+        .expect(200);
+
+      expect(res.body.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('Query of users expenses filtered by currency', () => {
+    test('Given a valid userId and filter parameter, expense records of the user should be returned', async () => {
+      const res = await Api
+        .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&currency=DKK')
+        .expect(200);
+
+      expect(res.body.length).toBeGreaterThan(0);
+    });
+
+    test('Given a valid userId and an invalid currency filter value, request should return nothing', async () => {
+      const res = await Api
+        .get('/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&currency=DKs')
+        .expect(404);
+
+      expect(res.body).toEqual({});
+    });
+  });
 });
