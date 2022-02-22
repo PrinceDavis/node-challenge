@@ -1,5 +1,7 @@
 import config from 'config';
+import { connect } from '@nc/utils/db';
 import context from './middleware/context';
+import { router as expenseRoutes } from '@nc/domain-expense';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
@@ -15,7 +17,6 @@ const server: Server | SecureServer = (config.https.enabled === true) ? createHT
 server.ready = false;
 
 gracefulShutdown(server);
-
 app.use(helmet());
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
@@ -28,16 +29,21 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
 
 app.use(context);
 app.use(security);
-
 app.use('/user', userRoutes);
+app.use('/expense', expenseRoutes);
 
-app.use(function(err, req, res) {
-  res.status(500).json(err);
-});
+// app.use(function(req, res) {
+//   res.status(500).json({
+//     error: `${req.method} method is not defined on ${req.path}`,
+//   });
+// });
 
-server.listen(config.port, () => {
-  server.ready = true;
-  logger.log(`Server started on port ${config.port}`);
-});
+(async () => {
+  await connect();
+  server.listen(config.port, () => {
+    server.ready = true;
+    logger.log(`Server started on port ${config.port}`);
+  });
+})();
 
 export default server;
