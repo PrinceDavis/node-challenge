@@ -32,11 +32,11 @@ app.use(security);
 app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
 
-app.use(function(req, res) {
-  res.status(500).json({
-    error: `${req.method} method is not defined on ${req.path}`,
-  });
-});
+// app.use(function(req, res) {
+//   res.status(500).json({
+//     error: `${req.method} method is not defined on ${req.path}`,
+//   });
+// });
 
 (async () => {
   await connect();

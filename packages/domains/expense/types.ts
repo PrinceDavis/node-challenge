@@ -7,3 +7,8 @@ export interface Expense {
     status: string
     id: string
 }
+
+export interface readExpensesInputs {
+    userId: string
+    sortBy?: string
+  }
