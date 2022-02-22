@@ -8,11 +8,10 @@ const schema = Joi.object({
   DB_PORT: Joi.string().required(),
   HOST: Joi.string().required(),
   PORT: Joi.string().required(),
-});
+}).unknown().required();
 
 const { error, value } = schema.validate(process.env);
 if (error) throw new Error(`Config validation failed ${error.message}`);
-
 module.exports = {
   db: {
     host: value.DB_HOST,

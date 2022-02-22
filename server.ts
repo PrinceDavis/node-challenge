@@ -15,7 +15,6 @@ const server: Server | SecureServer = (config.https.enabled === true) ? createHT
 server.ready = false;
 
 gracefulShutdown(server);
-
 app.use(helmet());
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
@@ -31,8 +30,10 @@ app.use(security);
 
 app.use('/user', userRoutes);
 
-app.use(function(err, req, res) {
-  res.status(500).json(err);
+app.use(function(req, res) {
+  res.status(500).json({
+    error: `${req.method} method is not defined on ${req.path}`,
+  });
 });
 
 server.listen(config.port, () => {
