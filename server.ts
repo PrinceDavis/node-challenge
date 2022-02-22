@@ -1,6 +1,7 @@
 import config from 'config';
 import { connect } from '@nc/utils/db';
 import context from './middleware/context';
+import { router as expenseRoutes } from '@nc/domain-expense';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
@@ -29,6 +30,7 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
 app.use(context);
 app.use(security);
 app.use('/user', userRoutes);
+app.use('/expense', expenseRoutes);
 
 app.use(function(req, res) {
   res.status(500).json({
