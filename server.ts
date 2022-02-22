@@ -3,6 +3,7 @@ import context from './middleware/context';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
+import { connect } from '@nc/utils/db';
 import Logger from '@nc/utils/logging';
 import security from './middleware/security';
 import { router as userRoutes } from '@nc/domain-user';
@@ -27,7 +28,6 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
 
 app.use(context);
 app.use(security);
-
 app.use('/user', userRoutes);
 
 app.use(function(req, res) {
@@ -36,9 +36,12 @@ app.use(function(req, res) {
   });
 });
 
-server.listen(config.port, () => {
-  server.ready = true;
-  logger.log(`Server started on port ${config.port}`);
-});
+(async () => {
+  await connect();
+  server.listen(config.port, () => {
+    server.ready = true;
+    logger.log(`Server started on port ${config.port}`);
+  });
+})();
 
 export default server;
