@@ -15,6 +15,7 @@
   "scripts": {
     "watch": "nodemon $npm_package_main",
     "start": "node $npm_package_main",
+    "test:watch": "yarn test --watch",
     "lint": "eslint --ext .ts --ext .js .",
     "lint:fix": "eslint --ext .ts --ext .js . --fix",
     "test": "yarn test:unit && yarn test:mid-level",

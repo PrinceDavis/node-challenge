@@ -1,9 +1,9 @@
 import config from 'config';
+import { connect } from '@nc/utils/db';
 import context from './middleware/context';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
 import helmet from 'helmet';
-import { connect } from '@nc/utils/db';
 import Logger from '@nc/utils/logging';
 import security from './middleware/security';
 import { router as userRoutes } from '@nc/domain-user';

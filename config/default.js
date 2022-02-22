@@ -33,6 +33,7 @@ module.exports = {
     enabled: false,
   },
   port: value.PORT,
+  auth: {},
   shutdown: {
     appKill: 1000,
     serverClose: 100,
