@@ -9,14 +9,17 @@ export function readExpenses(queryInput: readExpensesInputs): Promise<Expense[]>
   return query(queryString, queryArgs).then((response) => response.rows);
 }
 
-export function storeExpense(input: Map<String, String | number>) {
+export async function storeExpense(input: Map<String, String | number>) {
   input.set('id', uuidv4());
   const keys = Array.from(input.keys());
   const values = Array.from(input.values());
 
   const valuePlaceHolder = getValuePlaceHolders(keys.length);
   const sql = `INSERT INTO ${TABLE_NAME}(${keys.join(', ')}) VALUES(${valuePlaceHolder.join(', ')})`;
-  return query(sql, values).then((response) => response.rowCount);
+  console.log(sql)
+  await query(sql, values);
+  return query(`SELECT * FROM ${TABLE_NAME} WHERE id = $1`, [input.get('id')])
+    .then((response) => response.rows[0]);
 }
 
 function getValuePlaceHolders(length: number) {
