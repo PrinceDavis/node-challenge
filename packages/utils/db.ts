@@ -1,10 +1,10 @@
-import { Client } from 'pg';
 import config from 'config';
+import { Pool } from 'pg';
 
 let db;
 
 export function connect() {
-  db = new Client(config.db);
+  db = new Pool(config.db);
   return db.connect();
 }
 

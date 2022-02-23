@@ -1,5 +1,14 @@
 version: "3"
 services:
+  redis:
+    image: redis
+    networks:
+      - webnet
+    volumes:
+      - redis-data:/var/lib/redis/data
+    command: "redis-server"
+    ports:
+      - 6379:6379
   db:
     image: postgres
     container_name: pleo_db
@@ -22,6 +31,7 @@ services:
     networks:
       - webnet
     depends_on:
+      - redis
       - db
     ports:
       - "9001:9001"
@@ -29,3 +39,4 @@ networks:
   webnet:
 volumes:
   postgres-data:
+  redis-data:

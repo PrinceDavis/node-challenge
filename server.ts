@@ -1,5 +1,6 @@
 import config from 'config';
 import { connect } from '@nc/utils/db';
+import { connectClient } from '@nc/domain-expense/data';
 import context from './middleware/context';
 import { router as expenseRoutes } from '@nc/domain-expense';
 import express from 'express';
@@ -32,14 +33,15 @@ app.use(security);
 app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
 
-// app.use(function(req, res) {
-//   res.status(500).json({
-//     error: `${req.method} method is not defined on ${req.path}`,
-//   });
-// });
+app.use(function(req, res) {
+  res.status(404).json({
+    error: `${req.method} method is not defined on ${req.path}`,
+  });
+});
 
 (async () => {
   await connect();
+  await connectClient();
   server.listen(config.port, () => {
     server.ready = true;
     logger.log(`Server started on port ${config.port}`);

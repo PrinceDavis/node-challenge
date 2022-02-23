@@ -4,6 +4,7 @@ const path = require('path');
 
 const schema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
+  REDIS_URL: Joi.string().required(),
   DB_USER: Joi.string().required(),
   DB_NAME: Joi.string().required(),
   DB_HOST: Joi.string().required(),
@@ -22,6 +23,7 @@ module.exports = {
     host: value.DB_HOST,
     port: value.DB_PORT,
   },
+  redisUrl: value.REDIS_URL,
   debug: {
     stackSize: 4,
   },
