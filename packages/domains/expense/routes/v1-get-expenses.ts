@@ -1,11 +1,14 @@
 import { ApiError } from '@nc/utils/errors';
 import { getUserExpenses } from '../model';
+import Logger from '@nc/utils/logging';
 import { Router } from 'express';
 import { to } from '@nc/utils/async';
 import { validateQueryInputs } from './request-validator';
 import { getData, saveData } from '../data';
 
 export const router = Router();
+
+const logger = Logger('get-expenses');
 
 router.get('/get-user-expenses', validateQueryInputs, async function getUserExpensesHandler(req, res, next) {
   const query = {
@@ -30,6 +33,7 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
   if (!userExpenses.length) {
     return res.json({});
   }
-  await saveData(req.url, userExpenses);
+  const [redisError] = await to(saveData(req.url, userExpenses));
+  logger.error(redisError);
   return res.json(userExpenses);
 });

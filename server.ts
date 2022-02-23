@@ -19,7 +19,7 @@ const server: SecureServer | Server = (config.https.enabled === true) ? <SecureS
 server.ready = false;
 
 gracefulShutdown(server);
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }));
 app.get('/readycheck', function readinessEndpoint(req, res) {
   const status = (server.ready) ? 200 : 503;
   res.status(status).send(status === 200 ? 'OK' : 'NOT OK');
