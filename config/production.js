@@ -3,8 +3,8 @@ const fs = require('fs');
 module.exports = {
   https: {
     enabled: true,
-    key: fs.readFileSync('./certs/test-key.key'),
-    cert: fs.readFileSync('./certs/test-cert.pem'),
+    key: fs.readFileSync('./certs/key.pem'),
+    cert: fs.readFileSync('./certs/cert.pem'),
   },
   shutdown: {
     appKill: 30000,
