@@ -6,6 +6,9 @@ import { validateBodyInputs } from './request-validator';
 
 export const router = Router();
 
+/**
+ * Handle post request to store a user expense data
+ */
 router.post('/store-user-expense', validateBodyInputs, async function storeUserExpensesHandler(req, res, next) {
   const body = {
     merchant_name: req.body.merchantName,

@@ -1,3 +1,4 @@
+// used .env file to store sensitive data
 require('dotenv').config();
 const Joi = require('joi');
 const path = require('path');

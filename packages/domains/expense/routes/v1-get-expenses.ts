@@ -10,6 +10,9 @@ export const router = Router();
 
 const logger = Logger('get-expenses');
 
+/**
+ * Handle get request to retrieve a user expense data
+ */
 router.get('/get-user-expenses', validateQueryInputs, async function getUserExpensesHandler(req, res, next) {
   const query = {
     merchantName: <string>req.query.merchantName || '',
