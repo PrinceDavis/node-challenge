@@ -18,3 +18,21 @@ export function validateQueryInputs(req, res, next) {
   }
   next();
 }
+
+export function validateBodyInputs(req, res, next) {
+  const schema = Joi.object({
+    status: Joi.string().valid('pending', 'processed').required(),
+    merchantName: Joi.string().max(40).required(),
+    currency: Joi.string().min(3).max(4).required(),
+    dateCreated: Joi.string().max(25).required(),
+    userId: Joi.string().required(),
+    amount: Joi.number().required(),
+  }).required();
+  const { error } = schema.validate(req.body);
+  if (error) {
+    return res.status(403).json({
+      error: error.message,
+    });
+  }
+  next();
+}

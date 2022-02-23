@@ -31,6 +31,7 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
 
 app.use(context);
 app.use(security);
+app.use(express.json());
 app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
 
