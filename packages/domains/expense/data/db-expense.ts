@@ -16,7 +16,6 @@ export async function storeExpense(input: Map<String, String | number>) {
 
   const valuePlaceHolder = getValuePlaceHolders(keys.length);
   const sql = `INSERT INTO ${TABLE_NAME}(${keys.join(', ')}) VALUES(${valuePlaceHolder.join(', ')})`;
-  console.log(sql)
   await query(sql, values);
   return query(`SELECT * FROM ${TABLE_NAME} WHERE id = $1`, [input.get('id')])
     .then((response) => response.rows[0]);
