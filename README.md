@@ -10,7 +10,7 @@ Take home test for Node.js developers.
 
 - Create a `.env` in the base directory from the .env-example file included.
 - Make sure your node version is >=16
-- Note: the app pre-startup check fill fails and app would start if you don't have the right env variables or node version is below the required version.
+- Note: the app pre-startup check fill fails and app would not start if you don't have the right env variables or node version is below the required version.
 
 
 Run:
@@ -46,6 +46,9 @@ yarn test:acceptance
 
 ### Summary
 - I liberally looked to what was in the user domain for inspiration in term of folder structures.
+- I added pre-start validation to ensure all env values are available and node runtime has the required version.
+- I added dontenv to easy env management
+- I added request validation for improved security
 - Thinking of API design, I wanted to make the expense route RESTFUL since I add feature to create new expense record but didn't do that at the end.
 - Might have to revisit the data caching going on, since I am parsing and stringifying records the overhead introduced by JSON methods is one to watch out for.
 - Adding test to the GraphQL endpoint is something that can be revisited.
