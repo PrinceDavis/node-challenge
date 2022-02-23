@@ -1,5 +1,12 @@
 import Joi from 'joi';
 
+/**
+ * Validate get request query parametrs
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
 export function validateQueryInputs(req, res, next) {
   const schema = Joi.object({
     sortBy: Joi.string().valid('amount_in_cents', 'date_created'),
@@ -22,6 +29,13 @@ export function validateQueryInputs(req, res, next) {
   next();
 }
 
+/**
+ * Validate post request body parametrs
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
 export function validateBodyInputs(req, res, next) {
   const schema = Joi.object({
     status: Joi.string().valid('pending', 'processed').required(),
