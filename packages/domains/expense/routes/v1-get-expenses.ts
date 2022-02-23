@@ -3,6 +3,7 @@ import { getUserExpenses } from '../model';
 import { Router } from 'express';
 import { to } from '@nc/utils/async';
 import { validateQueryInputs } from './request-validator';
+import { getData, saveData } from '../data';
 
 export const router = Router();
 
@@ -16,6 +17,10 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
     page: <string>req.query.page || '',
     userId: <string>req.query.userId,
   };
+  const data = await getData(req.url);
+  if (data) {
+    return res.json(JSON.parse(data));
+  }
   const [expenseError, userExpenses] = await to(getUserExpenses(query));
 
   if (expenseError) {
@@ -25,6 +30,6 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
   if (!userExpenses.length) {
     return res.json({});
   }
-
+  await saveData(req.url, userExpenses);
   return res.json(userExpenses);
 });

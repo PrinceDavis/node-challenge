@@ -1,4 +1,4 @@
-import { closeClient, connectClient, getDate, saveData } from '../data';
+import { closeClient, connectClient, getData, saveData } from '../data';
 
 beforeAll(async () => {
   await connectClient();
@@ -15,7 +15,7 @@ describe('[Packages | Expense-domain | Cache] cache data', () => {
       name: 'tg',
     });
 
-    const data = await getDate('person');
+    const data = await getData('person');
 
     expect(JSON.parse(data)).toEqual({
       role: 'software engineer',

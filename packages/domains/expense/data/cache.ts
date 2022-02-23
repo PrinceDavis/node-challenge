@@ -18,7 +18,7 @@ export function saveData(key: string, value: any) {
   });
 }
 
-export function getDate(key: string) {
+export function getData(key: string) {
   if (!client) {
     client = createClient();
   }
