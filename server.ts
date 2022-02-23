@@ -44,7 +44,8 @@ app.use(function(req, res) {
   await connectClient();
   server.listen(config.port, () => {
     server.ready = true;
-    logger.log(`Server started on port ${config.port}`);
+    console.log(server.address())
+    logger.log(`Server started on  ${config.port}`);
   });
 })();
 
