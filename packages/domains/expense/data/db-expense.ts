@@ -1,13 +1,33 @@
 import { query } from '@nc/utils/db';
+import { v4 as uuidv4 } from 'uuid';
 import { Expense, readExpensesInputs } from '../types';
 
+const TABLE_NAME = 'expenses';
+
 export function readExpenses(queryInput: readExpensesInputs): Promise<Expense[]> {
-  const { queryString, queryArgs } = buildSql(queryInput);
+  const { queryString, queryArgs } = buildSqlQuery(queryInput);
   return query(queryString, queryArgs).then((response) => response.rows);
 }
 
-function buildSql(queryInput: readExpensesInputs) {
-  const TABLE_NAME = 'expenses';
+export function storeExpense(input: Map<String, String | number>) {
+  input.set('id', uuidv4());
+  const keys = Array.from(input.keys());
+  const values = Array.from(input.values());
+
+  const valuePlaceHolder = getValuePlaceHolders(keys.length);
+  const sql = `INSERT INTO ${TABLE_NAME}(${keys.join(', ')}) VALUES(${valuePlaceHolder.join(', ')})`;
+  return query(sql, values).then((response) => response.rowCount);
+}
+
+function getValuePlaceHolders(length: number) {
+  const placeHolders = [];
+  for (let i = 1; i <= length; i++) {
+    placeHolders.push(`$${i}`);
+  }
+  return placeHolders;
+}
+
+function buildSqlQuery(queryInput: readExpensesInputs) {
   const { userId, sortBy, merchantName, currency, status, pageSize, page } = queryInput;
   const queryString = [`SELECT * FROM ${TABLE_NAME}  where user_id = $1`];
   let currentParameter = 1;
