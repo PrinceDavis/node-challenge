@@ -44,10 +44,10 @@ yarn test:acceptance
 ```
 
 
-### My Thinking
+### Summary
 - I liberally looked to what was in the user domain for inspiration in term of folder structures.
 - Thinking of API design, I wanted to make the expense route RESTFUL since I add feature to create new expense record but didn't do that at the end.
 - Might have to revisit the data caching going on, since I am parsing and stringifying records the overhead introduced by JSON methods is one to watch out for.
 - Adding test to the GraphQL endpoint is something that can be revisited.
-
-- Finally I spend about 8hr all putting these together.
+- My decision making process is camptured in my commit messages.
+- Finally, I spend about 5hr over 2 days putting these together.
