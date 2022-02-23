@@ -1,7 +1,5 @@
 # Node Challenge
 
-Take home test for Node.js developers.
-
 ### Functionalities
 - Paginated results.
 - Sorting by `amount_in_cents` or `date_created`.
