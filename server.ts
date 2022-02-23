@@ -2,6 +2,8 @@ import config from 'config';
 import { connect } from '@nc/utils/db';
 import { connectClient } from '@nc/domain-expense/data';
 import context from './middleware/context';
+import { createServer as createHTTPServer } from 'http';
+import { createServer as createHTTPSServer } from 'https';
 import { router as expenseRoutes } from '@nc/domain-expense';
 import express from 'express';
 import gracefulShutdown from '@nc/utils/graceful-shutdown';
@@ -9,12 +11,11 @@ import helmet from 'helmet';
 import Logger from '@nc/utils/logging';
 import security from './middleware/security';
 import { router as userRoutes } from '@nc/domain-user';
-import { createServer as createHTTPServer, Server } from 'http';
-import { createServer as createHTTPSServer, Server as SecureServer } from 'https';
+import { SecureServer, Server } from './types';
 
 const logger = Logger('server');
 const app = express();
-const server: Server | SecureServer = (config.https.enabled === true) ? createHTTPSServer(config.https, app as any) : createHTTPServer(app as any);
+const server: SecureServer | Server = (config.https.enabled === true) ? <SecureServer>createHTTPSServer(config.https, app as any) : <Server>createHTTPServer(app as any);
 server.ready = false;
 
 gracefulShutdown(server);
@@ -44,7 +45,6 @@ app.use(function(req, res) {
   await connectClient();
   server.listen(config.port, () => {
     server.ready = true;
-    console.log(server.address())
     logger.log(`Server started on  ${config.port}`);
   });
 })();
