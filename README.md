@@ -2,10 +2,23 @@
 
 Take home test for Node.js developers.
 
-## Let me see API first
+### Functionalities
+- Paginated results.
+- Sorting by `amount_in_cents` or `date_created`.
+- Filtering by `status` and `currency` and `merchant_name`.
+- Query using GraphQL.
+- Store new expense data.
+- GET, POST request validation.
+- Caching for resilence and performance.
+- dotenv for easy env management.
+- pre-start validation to cut out runtime/enviroment issues.
+
+
+## API
 - [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/62826cc1b0de3d2e57ff)
 - link to [doc](https://documenter.getpostman.com/view/263074/UVknubhG#2081ec66-2cd2-4fa3-b18a-a3259a7be31c)
----
+
+
 ### Running App
 
 - Create a `.env` in the base directory from the .env-example file included.
@@ -42,18 +55,6 @@ yarn test
 ```bash
 yarn test:acceptance
 ```
-
-### Functionalities
-- Paginated results.
-- Sorting by `amount_in_cents` or `date_created`.
-- Filtering by `status` and `currency` and `merchant_name`.
-- Query using GraphQL.
-- Store new expense data.
-- GET, POST request validation.
-- Caching for resilence and performance.
-- dotenv for easy env management.
-- pre-start validation to cut out runtime/enviroment issues.
-
 
 
 ### Summary
