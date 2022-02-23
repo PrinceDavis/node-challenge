@@ -1,6 +1,7 @@
 interface ConfigDefinition {
     host: string
     port: number
+    redisUrl: string
     https: {
         enabled: boolean
         key?: string

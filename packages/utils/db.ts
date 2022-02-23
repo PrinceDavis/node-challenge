@@ -10,12 +10,6 @@ export function connect() {
 
 export async function query(queryString: string, parameters?: any) {
   if (!db) await connect();
-  try {
-    const result = await db.query(queryString, parameters);
-    db.release();
-    return result;
-  } catch (error) {
-    db.release();
-    throw error;
-  }
+
+  return db.query(queryString, parameters);
 }
