@@ -40,7 +40,10 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
   }
 
   const [redisError] = await to(saveData(req.url, userExpenses));
-  logger.error(redisError);
+
+  if (redisError) {
+    logger.error(redisError);
+  }
 
   return res.json(userExpenses);
 });
