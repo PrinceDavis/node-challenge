@@ -1,6 +1,7 @@
 require('dotenv').config();
 const Joi = require('joi');
 const path = require('path');
+const fs = require('fs')
 
 const schema = Joi.object({
   DB_PASSWORD: Joi.string().required(),
@@ -32,7 +33,9 @@ module.exports = {
   },
   host: value.HOST,
   https: {
-    enabled: false,
+    enabled: true,
+    key: fs.readFileSync(path.resolve(__dirname, '..', 'certs/key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, '..', 'certs/cert.pem')),
   },
   port: value.PORT,
   auth: {},
