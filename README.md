@@ -43,12 +43,25 @@ yarn test
 yarn test:acceptance
 ```
 
+### Functionalities
+- Paginated results.
+- Sorting by `amount_in_cents` or `date_created`.
+- Filtering by `status` and `currency` and `merchant_name`.
+- Query using GraphQL.
+- Store new expense data.
+- GET, POST request validation.
+- Caching for resilence and performance.
+- dotenv for easy env management.
+- pre-start validation to cut out runtime/enviroment issues.
+
+
 
 ### Summary
+- I only allow sorting by `amount_in_cents` and `date_created` because they were the only data points that make sense to sort the records by, `merchant_name` is another candidate but not as strong a candidate as the other two.
 - I liberally looked to what was in the user domain for inspiration in term of folder structures.
 - I added pre-start validation to ensure all env values are available and node runtime has the required version.
-- I added dontenv to easy env management
-- I added request validation for improved security
+- I added dontenv to easy env management.
+- I added request validation for improved security.
 - Thinking of API design, I wanted to make the expense route RESTFUL since I add feature to create new expense record but didn't do that at the end.
 - Might have to revisit the data caching going on, since I am parsing and stringifying records the overhead introduced by JSON methods is one to watch out for.
 - Adding test to the GraphQL endpoint is something that can be revisited.
