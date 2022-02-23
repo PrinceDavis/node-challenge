@@ -20,7 +20,9 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
     page: <string>req.query.page || '',
     userId: <string>req.query.userId,
   };
+
   const data = await getData(req.url);
+
   if (data) {
     return res.json(JSON.parse(data));
   }
@@ -33,7 +35,9 @@ router.get('/get-user-expenses', validateQueryInputs, async function getUserExpe
   if (!userExpenses.length) {
     return res.json({});
   }
+
   const [redisError] = await to(saveData(req.url, userExpenses));
   logger.error(redisError);
+
   return res.json(userExpenses);
 });

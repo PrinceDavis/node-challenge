@@ -16,9 +16,11 @@ router.post('/store-user-expense', validateBodyInputs, async function storeUserE
     status: req.body.status,
   };
   const input = new Map();
+
   for (const key of Object.keys(body)) {
     input.set(key, body[key]);
   }
+
   const [expenseError, userExpense] = await to(storeUserExpense(input));
 
   if (expenseError) {

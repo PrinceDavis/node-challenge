@@ -10,12 +10,15 @@ export function validateQueryInputs(req, res, next) {
     pageSize: Joi.number(),
     page: Joi.number(),
   }).required();
+
   const { error } = schema.validate(req.query);
+
   if (error) {
     return res.status(403).json({
       error: error.message,
     });
   }
+
   next();
 }
 
@@ -28,11 +31,14 @@ export function validateBodyInputs(req, res, next) {
     userId: Joi.string().required(),
     amount: Joi.number().required(),
   }).required();
+
   const { error } = schema.validate(req.body);
+
   if (error) {
     return res.status(403).json({
       error: error.message,
     });
   }
+
   next();
 }

@@ -14,8 +14,10 @@ const schema = Joi.object({
   PORT: Joi.number().required(),
 }).unknown().required();
 
+// validate env values
 const { error, value } = schema.validate(process.env);
 if (error) throw new Error(`Config validation failed ${error.message}`);
+
 module.exports = {
   db: {
     password: value.DB_PASSWORD,
