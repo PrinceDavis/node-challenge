@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "eb7e6149-eae8-44ee-8a33-b81c6bd19459",
+		"name": "Pleo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Expenses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a list of user expenses in sorted order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&sortBy=amount_in_cents",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "sortBy",
+							"value": "amount_in_cents"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User expenses filtered by status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&status=processed",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "status",
+							"value": "processed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user expenses filtered by merchant name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&merchantName=Sliders",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "merchantName",
+							"value": "Sliders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user expenses filtered by currency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&currency=DKK",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "currency",
+							"value": "DKK"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user expenses filtered by currency and status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&currency=DKK&status=pending",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "currency",
+							"value": "DKK"
+						},
+						{
+							"key": "status",
+							"value": "pending"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user expenses using pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9001/expense/v1/get-user-expenses?userId=da140a29-ae80-4f0e-a62d-6c2d2bc8a474&page=2&pageSize=2",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"get-user-expenses"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "da140a29-ae80-4f0e-a62d-6c2d2bc8a474"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user expense using graphQL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\n  expenses(userId: \"da140a29-ae80-4f0e-a62d-6c2d2bc8a474\"){\n    date_created,\n    amount_in_cents,\n    merchant_name,\n    user_id,\n  }\n}",
+						"variables": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9001/expense/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store user expense",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"da140a29-ae80-4f0e-a62d-6c2d2bc8a431\",\n    \"dateCreated\": \"2021-09-20T18:57:40.021Z\",\n    \"merchantName\": \"Daisy\",\n    \"status\": \"pending\",\n    \"currency\": \"USD\",\n    \"amount\": \"400\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9001/expense/v1/store-user-expense",
+					"host": [
+						"localhost"
+					],
+					"port": "9001",
+					"path": [
+						"expense",
+						"v1",
+						"store-user-expense"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
